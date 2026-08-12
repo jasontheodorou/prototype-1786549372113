@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Do you get any of these benefits?" },
+        value: { text: data["benefits"] if data["benefits"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/benefits",
+            text: "Change",
+            visuallyHiddenText: "do you get any of these benefits?"
+          }]
+        }
+      },
+      {
+        key: { text: "Is your household income less than £7,400 a year after tax?" },
+        value: { text: data["universal-credit-income"] if data["universal-credit-income"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/universal-credit-income",
+            text: "Change",
+            visuallyHiddenText: "is your household income less than £7,400 a year after tax?"
+          }]
+        }
+      },
+      {
+        key: { text: "Is your child in full-time education at a state school in England?" },
+        value: { text: data["child-school-age"] if data["child-school-age"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/child-school-age",
+            text: "Change",
+            visuallyHiddenText: "is your child in full-time education at a state school in england?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your child's full name?" },
+        value: { text: data["child-name"] if data["child-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/child-name",
+            text: "Change",
+            visuallyHiddenText: "what is your child's full name?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is the name of your child's school?" },
+        value: { text: data["school-name"] if data["school-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/school-name",
+            text: "Change",
+            visuallyHiddenText: "what is the name of your child's school?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
