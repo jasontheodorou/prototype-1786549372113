@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Is your child in full-time education at a state school in England?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["child-school-age"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["child-school-age"], href: "#child-school-age" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "child-school-age",
+      fieldset: {
+        legend: {
+          text: "Is your child in full-time education at a state school in England?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "This includes primary schools, secondary schools, and academies. It does not include private schools." },
+      errorMessage: errors["child-school-age"] if errors else null,
+      value: data["child-school-age"],
+      items: [
+        { value: "yes", text: "Yes" },
+        { value: "no", text: "No" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
