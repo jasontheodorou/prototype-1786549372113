@@ -1,0 +1,10 @@
+{
+  "serviceName": "Apply for free school meals",
+  "serviceUrl": "/start",
+  "useAuth": false,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}
