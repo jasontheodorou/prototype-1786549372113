@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is the name of your child's school?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["school-name"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["school-name"], href: "#school-name" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukInput({
+      id: "school-name",
+      name: "school-name",
+      label: {
+        text: "What is the name of your child's school?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Enter the full name of the school, for example Oakfield Primary School." },
+      errorMessage: errors["school-name"] if errors else null,
+      value: data["school-name"]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
